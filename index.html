@@ -29,9 +29,9 @@
             --font-body: 'Segoe UI', system-ui, -apple-system, sans-serif;
             --transition-smooth: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
             --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --disc-size-mobile: 130px;
-            --disc-size-tablet: 150px;
-            --disc-size-desktop: 170px;
+            --disc-size-mobile: 105px;
+            --disc-size-tablet: 135px;
+            --disc-size-desktop: 160px;
         }
 
         * {
@@ -447,19 +447,27 @@
         .discs-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 12px;
             padding: 8px 4px;
             flex-shrink: 0;
             max-width: 500px;
             width: 100%;
             justify-items: center;
+            margin-bottom: 4px;
         }
 
-        @media (min-width: 500px) {
+        @media (min-width: 480px) {
+            .discs-grid {
+                gap: 16px;
+                max-width: 560px;
+            }
+        }
+
+        @media (min-width: 640px) {
             .discs-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 20px;
-                max-width: 600px;
+                max-width: 700px;
             }
         }
 
@@ -467,7 +475,7 @@
             .discs-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 25px;
-                max-width: 700px;
+                max-width: 780px;
             }
         }
 
@@ -475,7 +483,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 7px;
+            gap: 8px;
             cursor: pointer;
             position: relative;
             transition: transform var(--transition-fast);
@@ -486,19 +494,26 @@
 
         .disc-label {
             font-family: var(--font-body);
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            color: var(--text-secondary);
+            color: #fce4c0;
             text-align: center;
             transition: color var(--transition-fast);
-            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7), 0 1px 2px black;
+            background: rgba(0,0,0,0.5);
+            padding: 4px 8px;
+            border-radius: 30px;
+            backdrop-filter: blur(2px);
+            width: auto;
+            line-height: 1.2;
         }
 
         .disc-wrapper.active .disc-label {
             color: #fff;
-            text-shadow: 0 0 15px rgba(255, 180, 60, 0.8);
+            text-shadow: 0 0 15px rgba(255, 180, 60, 0.9);
+            background: rgba(0,0,0,0.6);
         }
 
         .disc-cd {
@@ -633,8 +648,8 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
-            padding: 12px 20px;
-            margin-top: 10px;
+            padding: 10px 20px;
+            margin-top: 8px;
             flex-shrink: 0;
             background: rgba(20, 10, 4, 0.8);
             border-radius: 50px;
@@ -679,7 +694,6 @@
             fill: currentColor;
         }
 
-        /* Botão TIRO - Estilo cinematográfico */
         .btn-tiro {
             width: 55px;
             height: 55px;
@@ -732,6 +746,7 @@
             letter-spacing: 1px;
             text-align: center;
             flex-shrink: 0;
+            margin-top: 2px;
         }
         .status-indicator .current-cat {
             color: #fff;
@@ -741,8 +756,8 @@
 
         .sequence-dots {
             display: flex;
-            gap: 6px;
-            margin-bottom: 4px;
+            gap: 8px;
+            margin-bottom: 6px;
             flex-shrink: 0;
             flex-wrap: wrap;
             justify-content: center;
@@ -812,7 +827,8 @@
                 height: var(--disc-size-tablet);
             }
             .disc-label {
-                font-size: 0.75rem;
+                font-size: 0.8rem;
+                padding: 4px 10px;
             }
         }
 
@@ -822,7 +838,7 @@
                 height: var(--disc-size-desktop);
             }
             .disc-label {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .main-header h1 {
                 font-size: 1.8rem;
@@ -831,18 +847,19 @@
 
         @media (max-height: 640px) {
             .discs-grid {
-                gap: 10px;
+                gap: 8px;
             }
             .disc-cd {
-                width: 105px;
-                height: 105px;
+                width: 95px;
+                height: 95px;
             }
             .disc-label {
                 font-size: 0.65rem;
+                padding: 2px 6px;
             }
             .control-bar {
-                padding: 8px 16px;
-                margin-top: 5px;
+                padding: 6px 16px;
+                margin-top: 4px;
             }
             .btn-play-pause, .btn-tiro {
                 width: 44px;
@@ -898,17 +915,15 @@
 
     <script>
         (function() {
-            // ============ CONFIGURAÇÃO DAS CATEGORIAS E LINKS DIRETOS ============
+            // CATEGORIAS (SEM PREPARAÇÃO)
             const CATEGORIES = [
                 { id: 'entrada', label: 'ENTRADA', color: '#4a90d9', colorDark: '#1e3a5f', glow: 'rgba(74,144,217,0.7)', order: 0, url: 'https://files.catbox.moe/jga4ul.mpeg' },
-                { id: 'preparacao', label: 'PREPARAÇÃO', color: '#4caf50', colorDark: '#1b5e20', glow: 'rgba(76,175,80,0.7)', order: 1, url: 'https://files.catbox.moe/rcaexj.mp3' },
-                { id: 'explode_coracao', label: 'EXPLODE CORAÇÃO', color: '#f44336', colorDark: '#7f0000', glow: 'rgba(244,67,54,0.7)', order: 2, url: 'https://files.catbox.moe/oxbyqm.mp3' },
-                { id: 'quadrilhao', label: 'QUADRILHÃO', color: '#ff9800', colorDark: '#6d3500', glow: 'rgba(255,152,0,0.7)', order: 3, url: 'https://files.catbox.moe/ld6txt.mpeg' },
-                { id: 'chute_menina', label: 'XOTE DA MENINA', color: '#e91e63', colorDark: '#6d0030', glow: 'rgba(233,30,99,0.7)', order: 4, url: 'https://files.catbox.moe/yjmdjo.mpeg' },
-                { id: 'despedida', label: 'DESPEDIDA', color: '#9c27b0', colorDark: '#3d0050', glow: 'rgba(156,39,176,0.7)', order: 5, url: 'https://files.catbox.moe/ld6txt.mpeg' }
+                { id: 'explode_coracao', label: 'EXPLODE CORAÇÃO', color: '#f44336', colorDark: '#7f0000', glow: 'rgba(244,67,54,0.7)', order: 1, url: 'https://files.catbox.moe/hkv1jf.mp3' },
+                { id: 'quadrilhao', label: 'QUADRILHÃO', color: '#ff9800', colorDark: '#6d3500', glow: 'rgba(255,152,0,0.7)', order: 2, url: 'https://files.catbox.moe/ld6txt.mpeg' },
+                { id: 'chute_menina', label: 'XOTE DA MENINA', color: '#e91e63', colorDark: '#6d0030', glow: 'rgba(233,30,99,0.7)', order: 3, url: 'https://files.catbox.moe/yjmdjo.mpeg' },
+                { id: 'despedida', label: 'DESPEDIDA', color: '#9c27b0', colorDark: '#3d0050', glow: 'rgba(156,39,176,0.7)', order: 4, url: 'https://files.catbox.moe/b084ae.mp3' }
             ];
 
-            // ============ ESTADO DO APP ============
             const state = {
                 currentCategoryId: null,
                 isPlaying: false,
@@ -918,7 +933,6 @@
                 savedPauseTime: 0
             };
 
-            // ============ ELEMENTOS DO DOM ============
             const splashScreen = document.getElementById('splashScreen');
             const mainScreen = document.getElementById('mainScreen');
             const btnOpenMain = document.getElementById('btnOpenMain');
@@ -933,7 +947,6 @@
             const bandeirinhasContainer = document.getElementById('bandeirinhasContainer');
             const btnTiro = document.getElementById('btnTiro');
 
-            // ============ CRIA ELEMENTOS DECORATIVOS ============
             function createSparks() {
                 const count = 28;
                 let html = '';
@@ -957,7 +970,6 @@
                 bandeirinhasContainer.innerHTML = html;
             }
 
-            // ============ TOAST ============
             let toastTimeout;
             function showToast(message, duration = 2000) {
                 clearTimeout(toastTimeout);
@@ -968,7 +980,6 @@
                 }, duration);
             }
 
-            // ============ ÁUDIO ============
             function createAudioElement() {
                 if (state.audioElement) {
                     state.audioElement.pause();
@@ -995,9 +1006,7 @@
                     const nextCat = getNextCategory(currentCat.order);
                     if (nextCat) {
                         showToast(`▶ Próxima: ${nextCat.label}`, 1800);
-                        setTimeout(() => {
-                            playCategory(nextCat.id);
-                        }, 400);
+                        setTimeout(() => { playCategory(nextCat.id); }, 400);
                     } else {
                         showToast('🏁 Fim do roteiro!', 2500);
                         state.currentCategoryId = null;
@@ -1019,7 +1028,6 @@
                 return CATEGORIES.find(c => c.order === nextOrder) || null;
             }
 
-            // Efeitos de transição (fade)
             function fadeOutAudio(audioElement, durationMs = 180) {
                 return new Promise(resolve => {
                     if (!audioElement || audioElement.readyState === 0 || audioElement.paused) { resolve(); return; }
@@ -1090,7 +1098,6 @@
                 } catch(e) { console.warn('Transição não suportada'); }
             }
 
-            // ============ REPRODUÇÃO COM TRANSIÇÃO SUAVE ============
             async function playCategory(categoryId) {
                 if (state.isTransitioning) return;
                 const targetCategory = CATEGORIES.find(c => c.id === categoryId);
@@ -1153,7 +1160,6 @@
                 setTimeout(() => { if (audio.readyState >= 2 && !audio.paused) onCanPlay(); }, 250);
             }
 
-            // Botão Play/Pause corrigido
             function togglePlayPause() {
                 const audio = state.audioElement;
                 if (!audio || !audio.src) {
@@ -1173,94 +1179,29 @@
                 }
             }
 
-            // ============ BOTÃO TIRO ============
+            // NOVO TIRO: apenas pausa, toca o MP3 e NÃO retoma automaticamente
             async function dispararTiro() {
-                // Efeito visual de impacto no botão
                 btnTiro.classList.add('impact');
                 setTimeout(() => btnTiro.classList.remove('impact'), 200);
 
-                // Pausar a música atual e salvar o tempo
                 const audio = state.audioElement;
-                let currentTimeSaved = 0;
                 if (audio && !audio.paused) {
-                    currentTimeSaved = audio.currentTime;
                     await fadeOutAudio(audio, 50);
                     audio.pause();
-                    audio.currentTime = currentTimeSaved;
-                    state.savedPauseTime = currentTimeSaved;
                     state.isPlaying = false;
                     updatePlayPauseButton();
                     updateDiscStates();
-                } else if (audio && audio.paused && audio.src) {
-                    state.savedPauseTime = audio.currentTime;
                 }
-
-                // Criar efeito sonoro de tiro MUITO FORTE (Web Audio)
+                // Toca efeito de tiro a partir do link MP3
                 try {
-                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-                    const ctx = new AudioCtx();
-                    const now = ctx.currentTime;
-                    const gainMaster = ctx.createGain();
-                    gainMaster.gain.value = 1.2;
-                    gainMaster.connect(ctx.destination);
-
-                    // Ruído de explosão
-                    const duration = 1.0;
-                    const bufferSize = ctx.sampleRate * duration;
-                    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-                    const data = noiseBuffer.getChannelData(0);
-                    for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * 0.95;
-
-                    const noise = ctx.createBufferSource();
-                    noise.buffer = noiseBuffer;
-                    const lowpass = ctx.createBiquadFilter();
-                    lowpass.type = 'lowpass';
-                    lowpass.frequency.value = 2500;
-                    lowpass.Q.value = 1.2;
-                    const gainNoise = ctx.createGain();
-                    gainNoise.gain.setValueAtTime(0.9, now);
-                    gainNoise.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
-
-                    noise.connect(lowpass);
-                    lowpass.connect(gainNoise);
-                    gainNoise.connect(gainMaster);
-                    noise.start();
-                    noise.stop(now + 0.6);
-
-                    // Tonalidade de impacto grave
-                    const osc = ctx.createOscillator();
-                    osc.type = 'sine';
-                    osc.frequency.value = 80;
-                    const gainOsc = ctx.createGain();
-                    gainOsc.gain.setValueAtTime(0.8, now);
-                    gainOsc.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-                    osc.connect(gainOsc);
-                    gainOsc.connect(gainMaster);
-                    osc.start();
-                    osc.stop(now + 0.4);
-
-                    // Segundo harmônico para impacto metálico
-                    const osc2 = ctx.createOscillator();
-                    osc2.type = 'triangle';
-                    osc2.frequency.value = 320;
-                    const gainOsc2 = ctx.createGain();
-                    gainOsc2.gain.setValueAtTime(0.5, now);
-                    gainOsc2.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
-                    osc2.connect(gainOsc2);
-                    gainOsc2.connect(gainMaster);
-                    osc2.start();
-                    osc2.stop(now + 0.3);
-
-                    // Fechar contexto após som
-                    setTimeout(() => ctx.close(), 800);
-                } catch(e) { console.warn("Áudio Web Audio não suportado"); }
-
+                    const tiroAudio = new Audio('https://files.catbox.moe/w1yd3d.mp3');
+                    tiroAudio.volume = 1.0;
+                    tiroAudio.play().catch(e => console.warn("Falha no áudio do tiro", e));
+                } catch(e) { console.warn(e); }
                 showToast("💥 TIRO! Música pausada", 1500);
-                // Não resetar a música, apenas pausar e manter tempo
                 updateAllUI();
             }
 
-            // ============ UI ============
             function updateAllUI() {
                 updatePlayPauseButton();
                 updateDiscStates();
@@ -1322,7 +1263,6 @@
                 }
             }
 
-            // ============ INTERFACE DE DISCOS ============
             function buildDiscsGrid() {
                 let html = '';
                 CATEGORIES.forEach(cat => {
@@ -1354,7 +1294,6 @@
                 sequenceDots.innerHTML = html;
             }
 
-            // ============ INICIALIZAÇÃO ============
             async function initApp() {
                 createSparks();
                 createBandeirinhas();
@@ -1379,7 +1318,6 @@
                 });
 
                 showToast("🎶 Músicas prontas! Clique no disco", 2000);
-                console.log('🎭 Quadrilha do Sesc 2026 — Links diretos ativos, sequência automática, botão TIRO');
             }
 
             window.addEventListener('beforeunload', () => {
